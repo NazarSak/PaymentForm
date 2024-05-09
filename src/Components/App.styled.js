@@ -40,6 +40,5 @@ export const SubmitButton = styled.button`
 
   &:hover {
     background: linear-gradient(to right, #cc0000, #660066);
-    background-color: red;
   }
 `;
