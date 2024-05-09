@@ -1,4 +1,4 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
 import {
   Form,
   ContainerInterInputs,
@@ -9,23 +9,7 @@ import {
   List,
 } from "./FormInfo.styled";
 
-const FormInfo = () => {
-  const [formData, setFormData] = useState({
-    fname: "",
-    lname: "",
-    company: "",
-    email: "",
-    phone: "",
-    country: "",
-    city: "",
-    state: "",
-    address: "",
-    postalCode: "",
-  });
-
-  const [logo, setLogo] = useState(null);
-  const [logoUrl, setLogoUrl] = useState(null);
-
+const FormInfo = ({ formData, setFormData,onSubmit  }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -34,32 +18,22 @@ const FormInfo = () => {
     });
   };
 
-  const handleLogoChange = (e) => {
-    const file = e.target.files[0];
-    setLogo(file);
-    setLogoUrl(URL.createObjectURL(file));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formDataWithLogo = { ...formData, logo };
-    console.log(formDataWithLogo);
-  };
-
   return (
     <div className="form-container">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit={onSubmit}}>
         <List>
           <ContainerInterInputs>
             <InputContainerInfo>
               <InputText htmlFor="fname">Ім'я</InputText>
-
               <ShortInput
                 type="text"
                 id="fname"
                 name="fname"
                 value={formData.fname}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, fname: e.target.value });
+                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                }}
                 required
               />
             </InputContainerInfo>
@@ -70,41 +44,28 @@ const FormInfo = () => {
                 id="lname"
                 name="lname"
                 value={formData.lname}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, lname: e.target.value });
+                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                }}
                 required
               />
             </InputContainerInfo>
           </ContainerInterInputs>
 
           <InputContainerInfo>
-            <InputText htmlFor="company">Назва компанії,організації</InputText>
+            <InputText htmlFor="company">Назва компанії, організації</InputText>
             <LongInput
               type="text"
               id="company"
               name="company"
               value={formData.company}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, company: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
             />
           </InputContainerInfo>
-
-          {/* <InputContainerInfo>
-          <InputText htmlFor="logo">Логотип компанії:</InputText>
-
-          <LongInput
-            type="file"
-            id="logo"
-            name="logo"
-            accept="image/*"
-            onChange={handleLogoChange}
-          />
-          {logoUrl && (
-            <img
-              src={logoUrl}
-              alt="Логотип"
-              style={{ maxWidth: "200px", marginTop: "10px" }}
-            />
-          )}
-        </InputContainerInfo> */}
 
           <InputContainerInfo>
             <InputText htmlFor="email">Email адрес</InputText>
@@ -113,7 +74,10 @@ const FormInfo = () => {
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, email: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
               required
             />
           </InputContainerInfo>
@@ -125,7 +89,10 @@ const FormInfo = () => {
               id="phone"
               name="phone"
               value={formData.phone}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, phone: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
               pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
               required
             />
@@ -139,7 +106,10 @@ const FormInfo = () => {
               id="country"
               name="country"
               value={formData.country}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, country: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
             />
           </div>
 
@@ -151,17 +121,23 @@ const FormInfo = () => {
                 id="city"
                 name="city"
                 value={formData.city}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, city: e.target.value });
+                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                }}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <InputText htmlFor="state">Штат,Район</InputText>
+              <InputText htmlFor="state">Штат, Район</InputText>
               <ShortInput
                 type="text"
                 id="state"
                 name="state"
                 value={formData.state}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData({ ...formData, state: e.target.value });
+                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                }}
               />
             </div>
           </ContainerInterInputs>
@@ -172,7 +148,10 @@ const FormInfo = () => {
               id="address"
               name="address"
               value={formData.address}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, address: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
             />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -182,13 +161,33 @@ const FormInfo = () => {
               id="postalCode"
               name="postalCode"
               value={formData.postalCode}
-              onChange={handleChange}
+              onChange={(e) => {
+                setFormData({ ...formData, postalCode: e.target.value });
+                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+              }}
             />
           </div>
         </List>
       </Form>
     </div>
   );
+};
+
+FormInfo.propTypes = {
+  formData: PropTypes.shape({
+    fname: PropTypes.string.isRequired,
+    lname: PropTypes.string.isRequired,
+    company: PropTypes.string,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    country: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    address: PropTypes.string,
+    postalCode: PropTypes.string,
+  }).isRequired,
+  setFormData: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default FormInfo;

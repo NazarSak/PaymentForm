@@ -4,7 +4,7 @@ export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 5px;
 `;
 
 export const Title = styled.h2`
@@ -25,4 +25,20 @@ export const PhysPerson = styled.div`
 
 export const PhysPersonText = styled.p`
   color: white;
+`;
+
+export const SubmitButton = styled.button`
+  width: 250px;
+  height: 50px;
+  background: linear-gradient(to right, #ff0000, #800080);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.7s ease;
+
+  &:hover {
+    background: linear-gradient(to right, #cc0000, #660066);
+  }
 `;

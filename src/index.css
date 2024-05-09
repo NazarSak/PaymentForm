@@ -5,11 +5,30 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 h2,
-a {
+a,
+p {
   margin: 0;
   padding: 0;
 }
@@ -18,8 +37,10 @@ input {
   padding: 5px;
 }
 
-label {
+label,
+p {
   font-family: monospace;
+  color: gray;
 }
 
 input {
@@ -31,12 +52,6 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
 }
 
 h1 {
@@ -51,14 +66,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+

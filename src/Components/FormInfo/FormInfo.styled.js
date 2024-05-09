@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-    display: flex;
-    gap: 200px;
-`
+  display: flex;
+  gap: 200px;
+  margin-top: 20px;
+  justify-content: center;
+`;
 
 export const ContainerInterInputs = styled.div`
   display: flex;
@@ -24,8 +26,9 @@ export const ShortInput = styled.input`
   height: 15px;
   border-radius: 2px;
   padding: 5px;
-  color: white;
-  background-color: #d3d3d3;
+  color: black;
+  font-family: monospace;
+  border: 1px solid #ccc;
 `;
 
 export const LongInput = styled.input`
@@ -33,8 +36,9 @@ export const LongInput = styled.input`
   height: 15px;
   border-radius: 2px;
   padding: 5px;
-  color: white;
-  background-color: #d3d3d3;
+  color: black;
+  font-family: monospace;
+  border: 1px solid #ccc;
 `;
 
 export const List = styled.ul`
