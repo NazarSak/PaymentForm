@@ -16,7 +16,7 @@ import {
   Button,
   TextInButton,
 } from "./FormPay.styled";
-import "react-credit-cards/es/styles-compiled.css";
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
 const FormPay = ({
   cardNumber,
