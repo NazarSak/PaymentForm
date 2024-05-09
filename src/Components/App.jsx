@@ -31,15 +31,12 @@ function App() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
   const validateForm = () => {
-    // Перевірка наявності введених даних для особистих даних
     const isPersonalInfoValid = Object.values(formData).every(
       (value) => value !== ""
     );
 
-    // Перевірка наявності введених даних для кредитної картки
     const isCreditCardValid = cardNumber !== "" && expiry !== "" && cvc !== "";
 
-    // Повертаємо true, якщо і особисті дані, і дані картки є валідними
     return isPersonalInfoValid && isCreditCardValid;
   };
 

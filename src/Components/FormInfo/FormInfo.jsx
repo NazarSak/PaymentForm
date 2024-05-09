@@ -9,22 +9,14 @@ import {
   List,
 } from "./FormInfo.styled";
 
-const FormInfo = ({ formData, setFormData,onSubmit  }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
+const FormInfo = ({ formData, setFormData, onSubmit }) => {
   return (
     <div className="form-container">
-      <Form onSubmit={onSubmit={onSubmit}}>
+      <Form onSubmit={ onSubmit}>
         <List>
           <ContainerInterInputs>
             <InputContainerInfo>
-              <InputText htmlFor="fname">Ім'я</InputText>
+              <InputText htmlFor="fname">Ім&#39;я</InputText>
               <ShortInput
                 type="text"
                 id="fname"
@@ -32,7 +24,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
                 value={formData.fname}
                 onChange={(e) => {
                   setFormData({ ...formData, fname: e.target.value });
-                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                  e.target.classList.remove("invalid");
                 }}
                 required
               />
@@ -46,7 +38,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
                 value={formData.lname}
                 onChange={(e) => {
                   setFormData({ ...formData, lname: e.target.value });
-                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                  e.target.classList.remove("invalid");
                 }}
                 required
               />
@@ -62,7 +54,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.company}
               onChange={(e) => {
                 setFormData({ ...formData, company: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
             />
           </InputContainerInfo>
@@ -76,7 +68,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
               required
             />
@@ -91,7 +83,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.phone}
               onChange={(e) => {
                 setFormData({ ...formData, phone: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
               pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
               required
@@ -108,7 +100,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.country}
               onChange={(e) => {
                 setFormData({ ...formData, country: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
             />
           </div>
@@ -123,7 +115,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
                 value={formData.city}
                 onChange={(e) => {
                   setFormData({ ...formData, city: e.target.value });
-                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                  e.target.classList.remove("invalid");
                 }}
               />
             </div>
@@ -136,7 +128,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
                 value={formData.state}
                 onChange={(e) => {
                   setFormData({ ...formData, state: e.target.value });
-                  e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                  e.target.classList.remove("invalid");
                 }}
               />
             </div>
@@ -150,7 +142,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.address}
               onChange={(e) => {
                 setFormData({ ...formData, address: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
             />
           </div>
@@ -163,7 +155,7 @@ const FormInfo = ({ formData, setFormData,onSubmit  }) => {
               value={formData.postalCode}
               onChange={(e) => {
                 setFormData({ ...formData, postalCode: e.target.value });
-                e.target.classList.remove("invalid"); // Видалення класу invalid при зміні значення
+                e.target.classList.remove("invalid");
               }}
             />
           </div>

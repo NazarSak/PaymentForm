@@ -5,6 +5,10 @@ export const Form = styled.form`
   gap: 200px;
   margin-top: 20px;
   justify-content: center;
+  @media (max-width: 1039px) {
+    flex-direction: column;
+    gap: 80px;
+  }
 `;
 
 export const ContainerInterInputs = styled.div`

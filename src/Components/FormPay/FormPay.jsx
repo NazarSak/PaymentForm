@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import VisaLogo from "../../assets/visaLogo.png";
 import Private24 from "../../assets/Private24.png";
@@ -25,42 +25,44 @@ const FormPay = ({
   setExpiry,
   cvc,
   setCVC,
-  onPaymentMethodSelect,
-  selectedPaymentMethod,
 }) => {
   const [focus, setFocus] = useState(null);
-  const buttonRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-        // Додайте вашу логіку тут
+  const visaRef = useRef(null);
+  const private24Ref = useRef(null);
+  const terminalRef = useRef(null);
+  const webmoneyRef = useRef(null);
+  const paypalRef = useRef(null);
+
+  const handleButtonClick = (method) => {
+    const buttonRefs = {
+      Visa: visaRef,
+      Приват24: private24Ref,
+      "Термінал України": terminalRef,
+      Webmoney: webmoneyRef,
+      PayPal: paypalRef,
+    };
+
+    Object.keys(buttonRefs).forEach((key) => {
+      const ref = buttonRefs[key];
+      if (key === method) {
+        ref.current.style.backgroundColor = "#a394fc";
+      } else {
+        ref.current.style.backgroundColor = "#e1e8fa";
       }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleButtonClick = (color, method) => {
-    // Додайте вашу логіку тут
-    onPaymentMethodSelect(method);
+    });
   };
 
   return (
     <Section>
       <PaymentMethods>
-        <h2>Спосіб оплати</h2>
+        <p>Спосіб оплати</p>
         <List>
           <ListElement>
             <Button
-              ref={buttonRef}
-              onClick={() => handleButtonClick("purple", "Visa")}
-              background={
-                selectedPaymentMethod === "Visa" ? "purple" : "transparent"
-              }
+              ref={visaRef}
+              id="visa"
+              onClick={() => handleButtonClick("Visa")}
             >
               <img width="50" height="15" src={VisaLogo} alt="VisaLogo" />
               <TextInButton>Карта Visa/ MasterCard</TextInButton>
@@ -68,11 +70,9 @@ const FormPay = ({
           </ListElement>
           <ListElement>
             <Button
-              ref={buttonRef}
-              onClick={() => handleButtonClick("purple", "Приват 24")}
-              background={
-                selectedPaymentMethod === "Приват 24" ? "purple" : "transparent"
-              }
+              ref={private24Ref}
+              id="private24"
+              onClick={() => handleButtonClick("Приват24")}
             >
               <img width="80" height="20" src={Private24} alt="Private24" />
               <TextInButton>Приват 24</TextInButton>
@@ -80,13 +80,9 @@ const FormPay = ({
           </ListElement>
           <ListElement>
             <Button
-              ref={buttonRef}
-              onClick={() => handleButtonClick("purple", "Термінал України")}
-              background={
-                selectedPaymentMethod === "Термінал України"
-                  ? "purple"
-                  : "transparent"
-              }
+              ref={terminalRef}
+              id="terminal"
+              onClick={() => handleButtonClick("Термінал України")}
             >
               <img width="50" height="40" src={Terminal} alt="Terminal" />
               <TextInButton>Термінал України</TextInButton>
@@ -94,11 +90,9 @@ const FormPay = ({
           </ListElement>
           <ListElement>
             <Button
-              ref={buttonRef}
-              onClick={() => handleButtonClick("purple", "Webmoney")}
-              background={
-                selectedPaymentMethod === "Webmoney" ? "purple" : "transparent"
-              }
+              ref={webmoneyRef}
+              id="webmoney"
+              onClick={() => handleButtonClick("Webmoney")}
             >
               <img width="70" height="50" src={WebMoney} alt="WebMoney" />
               <TextInButton>Web Money</TextInButton>
@@ -106,11 +100,9 @@ const FormPay = ({
           </ListElement>
           <ListElement>
             <Button
-              ref={buttonRef}
-              onClick={() => handleButtonClick("purple", "PayPal")}
-              background={
-                selectedPaymentMethod === "PayPal" ? "purple" : "transparent"
-              }
+              ref={paypalRef}
+              id="paypal"
+              onClick={() => handleButtonClick("PayPal")}
             >
               <img width="60" height="50" src={PayPal} alt="PayPal" />
               <TextInButton>PayPal</TextInButton>
@@ -135,7 +127,13 @@ const FormPay = ({
             name="cardNumber"
             placeholder="Номер картки"
             value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={(e) => {
+              const input = e.target.value.replace(/\D/g, ""); // Видаляє всі символи, крім цифр
+              if (input.length <= 16) {
+                setCardNumber(input);
+              }
+            }}
+            pattern="\d*"
             onFocus={() => setFocus("number")}
           />
           <input
@@ -143,7 +141,13 @@ const FormPay = ({
             name="expiry"
             placeholder="Термін дії (мм/рр)"
             value={expiry}
-            onChange={(e) => setExpiry(e.target.value)}
+            onChange={(e) => {
+              const input = e.target.value.replace(/\D/g, ""); // Видаляє всі символи, крім цифр
+              if (input.length <= 4) {
+                setExpiry(input.replace(/(\d{2})(\d{2})/, "$1/$2")); // Автоматично додає "/" між місяцем і роком
+              }
+            }}
+            pattern="\d{2}/\d{2}"
             onFocus={() => setFocus("expiry")}
           />
           <input
@@ -151,7 +155,13 @@ const FormPay = ({
             name="cvc"
             placeholder="CVC"
             value={cvc}
-            onChange={(e) => setCVC(e.target.value)}
+            onChange={(e) => {
+              const input = e.target.value.replace(/\D/g, ""); // Видаляє всі символи, крім цифр
+              if (input.length <= 3) {
+                setCVC(input);
+              }
+            }}
+            pattern="\d*"
             onFocus={() => setFocus("cvc")}
           />
         </form>
@@ -167,7 +177,6 @@ FormPay.propTypes = {
   setExpiry: PropTypes.func.isRequired,
   cvc: PropTypes.string.isRequired,
   setCVC: PropTypes.func.isRequired,
-  onPaymentMethodSelect: PropTypes.func.isRequired,
   selectedPaymentMethod: PropTypes.string.isRequired,
 };
 

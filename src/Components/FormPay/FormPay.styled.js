@@ -4,6 +4,10 @@ import Cards from "react-credit-cards";
 export const Section = styled.section`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 1039px) {
+    flex-direction: column;
+    gap: 40px;
+  }
 `;
 
 export const StyledCards = styled(Cards)`
@@ -37,7 +41,7 @@ export const Button = styled.button`
   width: 100%;
   height: 100%;
   background-color: #e1e8fa;
-  transition: border-color 0.75s;
+  transition: all 0.75s;
   &:hover {
     border-color: #646cff;
   }

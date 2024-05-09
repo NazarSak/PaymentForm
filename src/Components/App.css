@@ -1,4 +1,4 @@
 .invalid {
-    border-color: red; /* Зміна кольору рамки на червоний */
-    background-color: #ffe6e6; /* Зміна кольору фону на червоний (за необхідності) */
-  }
+  border-color: red;
+  background-color: #ffe6e6;
+}
