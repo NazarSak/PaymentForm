@@ -37,7 +37,6 @@ export const SubmitButton = styled.button`
   font-size: 16px;
   cursor: pointer;
   transition: all 0.7s ease;
-
   &:hover {
     background: linear-gradient(to right, #cc0000, #660066);
   }
